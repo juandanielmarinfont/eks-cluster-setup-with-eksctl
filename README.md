@@ -18,6 +18,8 @@ unzip awscliv2.zip
 sudo ./aws/install
 ```
 
+![AWS CLI Installation](./images/1.png)
+
 #### ⚙️ 2. Configure AWS CLI
 
 Once you have the AWS CLI installed, configure it with your AWS credentials:
@@ -33,6 +35,8 @@ You will be prompted for:
 * **Default region name**: The region where you want to deploy the cluster (e.g., us-east-1).
 * **Default output format**: Typically json.
 
+![AWS Configure](./images/2.png)
+
 #### ⚙️ 3. Install eksctl
 
 `eksctl` is a simple command-line tool for creating and managing EKS clusters.
@@ -45,6 +49,8 @@ sudo mv /tmp/eksctl /usr/local/bin
 # Verify installation
 eksctl version
 ```
+
+![Install eksctl](./images/3.png)
 
 #### ⚙️ 4. Install kubectl
 
@@ -59,6 +65,8 @@ sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 # Verify the installation
 kubectl version --client
 ```
+
+![Install kubectl](./images/4.png)
 
 ### Step-by-Step Cluster Creation
 
@@ -76,6 +84,8 @@ export NODES_MIN=<min-number-of-nodes>     # e.g., "2"
 export NODES_MAX=<max-number-of-nodes>     # e.g., "5"
 ```
 
+![Export variables](./images/5.png)
+
 #### 🚀 2. Create the EKS Cluster
 
 Using `eksctl`, you can create an EKS cluster with the following command:
@@ -90,9 +100,10 @@ eksctl create cluster \
   --nodes-min $NODES_MIN \
   --nodes-max $NODES_MAX \
   --managed \
-  --with-oidc \
-  --enable-logging
+  --with-oidc
 ```
+
+![Creating Cluster in progress](./images/6.png)
 
 #### 🔧 3. Configure kubectl to Connect to the Cluster
 
@@ -108,6 +119,8 @@ To verify that the cluster is correctly configured and `kubectl` is connected, y
 kubectl get nodes
 ```
 
+![Connet to the Cluster](./images/7.png)
+
 #### 🗑️ 4. Deleting the EKS Cluster
 
 If you need to clean up and remove the cluster, you can use the following command:
@@ -115,6 +128,8 @@ If you need to clean up and remove the cluster, you can use the following comman
 ```bash
 eksctl delete cluster --name $CLUSTER_NAME
 ```
+
+![Delete the EKS Cluster](./images/8.png)
 
 This will delete the EKS cluster, including all associated resources.
 
@@ -131,6 +146,12 @@ This will delete the EKS cluster, including all associated resources.
     * **Solution**: Ensure that your AWS CLI is correctly configured, and that `kubectl` is using the correct kubeconfig. Run `aws eks update-kubeconfig` again if necessary. 
 * **Issue**: Cluster creation is stuck. 
     * **Solution**: Check AWS CloudFormation for stack creation status and troubleshoot any failed resources.
+
+### Future Improvements 
+
+* **CI/CD Pipeline Integration**: Automate the cluster creation and deployment process with a CI/CD pipeline using tools like Jenkins, Azure Pipelines, AWS CodePipelines, etc. 
+* **Infrastructure as Code**: Consider managing your entire infrastructure with tools like Terraform for better management of your cloud resources. 
+* **Advanced Monitoring**: Use Prometheus and Grafana for custom monitoring, alongside AWS CloudWatch.”
 
 ### License
 

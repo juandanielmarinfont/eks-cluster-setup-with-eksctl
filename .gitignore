@@ -1,0 +1,12 @@
+# Ignore AWS credentials
+.aws/
+
+# Ignore sensitive files
+*.env
+.env.*
+
+# Ignore WSL filesystem mounts
+/mnt/
+
+# Ignore AWS CLI installation zip
+awscliv2.zip
